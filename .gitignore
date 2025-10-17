@@ -70,6 +70,10 @@ deploy/
 *.sqlite
 *.h2.db
 
+# TomEE DataSource Configuration (contains credentials)
+**/WEB-INF/resources.xml
+**/META-INF/resources.xml
+
 # Compiled
 *.class
 
