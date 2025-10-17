@@ -41,7 +41,9 @@
         "formulahendry.auto-rename-tag", // Auto Rename Tag
         "Zignd.html-css-class-completion", // IntelliSense for CSS class names in HTML
         "naumovs.color-highlight", // Color Highlight
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode", // Prettier code formatter
+        "dotdevru.prettier-java", // Prettier Java plugin
+        "tlintrami.vscode-jstl-jsp"
       ]
     }
   },

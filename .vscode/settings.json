@@ -1,0 +1,40 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "java.format.enabled": true,
+  "prettier.enable": true,
+  "editor.formatOnPaste": true,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "eslint.workingDirectories": [
+    "./app/src/main/webui"
+  ],
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "typescript.format.enable": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "*.jsp": "jsp",
+    "*.tag": "jsp"
+  },
+  "[jsp]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.format.settings.url": "./build-tools/src/main/resources/product/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.compile.nullAnalysis.mode": "automatic"
+}
