@@ -44,7 +44,6 @@ nbdist/
 .nb-gradle/
 
 # IDE - VSCode
-.vscode/
 *.code-workspace
 
 # OS

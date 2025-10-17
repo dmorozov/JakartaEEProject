@@ -28,7 +28,8 @@
         "vscjava.vscode-maven",
         "redhat.vscode-xml",
         "redhat.vscode-microprofile", // YAML editor
-        "redhat.vscode-community-server-connector",
+        "redhat.vscode-community-server-connector", // Tomcat connector
+        "samuel-weinhardt.vscode-jsp-lang", // JSP editor
         // Git extensions
         "donjayamanne.githistory", // Git History
         "mhutchie.git-graph", // Git History Graph
