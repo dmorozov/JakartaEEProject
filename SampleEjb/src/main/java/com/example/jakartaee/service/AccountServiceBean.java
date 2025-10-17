@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
-@DeclareRoles({"admin", "user"})
+//@DeclareRoles({"admin", "user"})
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class AccountServiceBean implements AccountService {
 
@@ -24,7 +24,7 @@ public class AccountServiceBean implements AccountService {
     private EntityManager entityManager;
 
     @Override
-    @RolesAllowed({"admin", "user"})
+    //@RolesAllowed({"admin", "user"})
     public Account createAccount(Account account) {
         logger.info("Creating new account: " + account.getName());
         entityManager.persist(account);
@@ -33,7 +33,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    @RolesAllowed({"admin", "user"})
+    //@RolesAllowed({"admin", "user"})
     public Account updateAccount(Account account) {
         logger.info("Updating account with ID: " + account.getId());
         Account merged = entityManager.merge(account);
@@ -42,7 +42,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    @RolesAllowed("admin")
+    //@RolesAllowed("admin")
     public void deleteAccount(Long id) {
         logger.info("Deleting account with ID: " + id);
         Account account = entityManager.find(Account.class, id);
@@ -52,7 +52,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    @PermitAll
+    //@PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Account findAccountById(Long id) {
         logger.info("Finding account by ID: " + id);
@@ -60,7 +60,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    @PermitAll
+    //@PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Account findAccountByEmail(String email) {
         logger.info("Finding account by email: " + email);
@@ -71,7 +71,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    @PermitAll
+    //@PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Account> findAllAccounts() {
         logger.info("Finding all accounts");
@@ -80,7 +80,7 @@ public class AccountServiceBean implements AccountService {
     }
 
     @Override
-    @PermitAll
+    //@PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public long countAccounts() {
         logger.info("Counting all accounts");

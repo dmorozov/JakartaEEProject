@@ -17,6 +17,7 @@ services:
       args:
         INSTALL_MAVEN: "true"
         MAVEN_VERSION: "3.9.6"
+        NODE_VERSION: "20.17.0"
     environment:
       # NOTE: POSTGRES_DB/USER/PASSWORD should match values in db container
       POSTGRES_PASSWORD: samplepass
