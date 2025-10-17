@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="https://jakarta.ee/xml/ns/jakartaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/application_10.xsd"
+             version="10">
+
+    <application-name>JakartaEE Sample Application</application-name>
+    <description>JakartaEE 10 multi-module sample application with Struts 7, EJB, and JPA</description>
+
+    <!-- Core Library Module -->
+    <module>
+        <java>SampleCore.jar</java>
+    </module>
+
+    <!-- EJB Modules -->
+    <module>
+        <ejb>SampleEjb.jar</ejb>
+    </module>
+
+    <module>
+        <ejb>ExampleRemoteEJB.jar</ejb>
+    </module>
+
+    <!-- Web Module -->
+    <module>
+        <web>
+            <web-uri>SampleWeb.war</web-uri>
+            <context-root>/sample</context-root>
+        </web>
+    </module>
+
+    <!-- Security Roles -->
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+    <!-- Library Directory -->
+    <library-directory>lib</library-directory>
+
+</application>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example.jakartaee</groupId>
+    <artifactId>JakartaEEBootstrap</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>JakartaEE 10 Multi-Module Project</name>
+    <description>JakartaEE 10 multi-module Maven project with JPA, EJB, Struts 7, and EAR packaging</description>
+
+    <modules>
+        <module>SampleCore</module>
+        <module>SampleEjb</module>
+        <module>ExampleRemoteEJB</module>
+        <module>SampleWeb</module>
+        <module>SampleEar</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
+
+        <!-- JakartaEE 10 -->
+        <jakartaee.version>10.0.0</jakartaee.version>
+
+        <!-- Struts 7 -->
+        <struts2.version>7.0.3</struts2.version>
+
+        <!-- Database -->
+        <postgresql.version>42.7.3</postgresql.version>
+
+        <!-- Maven Plugins -->
+        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
+        <maven.ejb.plugin.version>3.2.1</maven.ejb.plugin.version>
+        <maven.ear.plugin.version>3.3.0</maven.ear.plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- JakartaEE 10 API -->
+            <dependency>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-api</artifactId>
+                <version>${jakartaee.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- PostgreSQL JDBC Driver -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <!-- Struts 7 Core (contains ActionSupport and other core classes) -->
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-core</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+            <!-- Struts 7 Convention Plugin -->
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-convention-plugin</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+            <!-- Struts 7 Tiles Plugin -->
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-tiles-plugin</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+            <!-- Struts 7 JSON Plugin -->
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-json-plugin</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+            <!-- Struts 7 Jakarta Inject Plugin (for CDI/EJB integration) -->
+            <dependency>
+                <groupId>org.apache.struts</groupId>
+                <artifactId>struts2-cdi-plugin</artifactId>
+                <version>${struts2.version}</version>
+            </dependency>
+
+            <!-- Project Modules -->
+            <dependency>
+                <groupId>com.example.jakartaee</groupId>
+                <artifactId>SampleCore</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.example.jakartaee</groupId>
+                <artifactId>SampleEjb</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.example.jakartaee</groupId>
+                <artifactId>ExampleRemoteEJB</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.example.jakartaee</groupId>
+                <artifactId>SampleWeb</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven.war.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>${maven.ejb.plugin.version}</version>
+                    <configuration>
+                        <ejbVersion>4.0</ejbVersion>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>${maven.ear.plugin.version}</version>
+                    <configuration>
+                        <version>10</version>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

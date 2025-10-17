@@ -1,0 +1,60 @@
+version: "3.8"
+
+volumes:
+  postgres-data:
+
+networks:
+  default:
+    name: jakarta-ee-network
+    driver: bridge
+
+services:
+  jakarta-ee-app:
+    container_name: jakarta-ee-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        INSTALL_MAVEN: "true"
+        MAVEN_VERSION: "3.9.6"
+    environment:
+      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in db container
+      POSTGRES_PASSWORD: samplepass
+      POSTGRES_USER: sampleuser
+      POSTGRES_DB: sampledb
+      POSTGRES_HOST: jakarta-ee-db
+      POSTGRES_PORT: 5434
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    volumes:
+      - ..:/workspaces:cached
+      - ~/.ssh:/home/vscode/.ssh
+      - ~/.m2:/home/vscode/.m2
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Uncomment the next line to use a non-root user for all processes.
+    # user: vscode
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+
+  jakarta-ee-db:
+    container_name: jakarta-ee-db
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      # NOTE: POSTGRES_DB/USER/PASSWORD should match values in app container
+      POSTGRES_PASSWORD: samplepass
+      POSTGRES_USER: sampleuser
+      POSTGRES_DB: sampledb
+
+    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
+    # (Adding the "ports" property to this file will not forward from a Codespace.)

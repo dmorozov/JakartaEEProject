@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn clean install:*)",
+      "Bash(java:*)",
+      "Bash(export JAVA_HOME=/usr/lib/jvm/graalvm-ce-java17-22.1.0)",
+      "Bash(./mvnw:*)",
+      "Bash(cat:*)",
+      "Bash(javap:*)",
+      "Read(//usr/lib/jvm/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

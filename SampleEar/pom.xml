@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.example.jakartaee</groupId>
+        <artifactId>JakartaEEBootstrap</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>SampleEar</artifactId>
+    <packaging>ear</packaging>
+
+    <name>SampleEar - EAR Package</name>
+    <description>EAR module packaging all modules together</description>
+
+    <dependencies>
+        <!-- Core Module -->
+        <dependency>
+            <groupId>com.example.jakartaee</groupId>
+            <artifactId>SampleCore</artifactId>
+        </dependency>
+
+        <!-- EJB Modules -->
+        <dependency>
+            <groupId>com.example.jakartaee</groupId>
+            <artifactId>SampleEjb</artifactId>
+            <type>ejb</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example.jakartaee</groupId>
+            <artifactId>ExampleRemoteEJB</artifactId>
+            <type>ejb</type>
+        </dependency>
+
+        <!-- Web Module -->
+        <dependency>
+            <groupId>com.example.jakartaee</groupId>
+            <artifactId>SampleWeb</artifactId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>JakartaEESample</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <version>10</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+
+                    <modules>
+                        <jarModule>
+                            <groupId>com.example.jakartaee</groupId>
+                            <artifactId>SampleCore</artifactId>
+                            <bundleFileName>SampleCore.jar</bundleFileName>
+                        </jarModule>
+
+                        <ejbModule>
+                            <groupId>com.example.jakartaee</groupId>
+                            <artifactId>SampleEjb</artifactId>
+                            <bundleFileName>SampleEjb.jar</bundleFileName>
+                        </ejbModule>
+
+                        <ejbModule>
+                            <groupId>com.example.jakartaee</groupId>
+                            <artifactId>ExampleRemoteEJB</artifactId>
+                            <bundleFileName>ExampleRemoteEJB.jar</bundleFileName>
+                        </ejbModule>
+
+                        <webModule>
+                            <groupId>com.example.jakartaee</groupId>
+                            <artifactId>SampleWeb</artifactId>
+                            <bundleFileName>SampleWeb.war</bundleFileName>
+                            <contextRoot>/sample</contextRoot>
+                        </webModule>
+                    </modules>
+
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

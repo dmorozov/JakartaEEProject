@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!-- Base Layout -->
+    <definition name="baseLayout" template="/WEB-INF/layouts/base-layout.jsp">
+        <put-attribute name="title" value="JakartaEE Sample Application"/>
+        <put-attribute name="header" value="/WEB-INF/layouts/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/layouts/menu.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/pages/welcome.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp"/>
+    </definition>
+
+    <!-- Home -->
+    <definition name="home" extends="baseLayout">
+        <put-attribute name="title" value="Home - JakartaEE Sample"/>
+        <put-attribute name="body" value="/WEB-INF/pages/home.jsp"/>
+    </definition>
+
+    <!-- Account Pages -->
+    <definition name="account.list" extends="baseLayout">
+        <put-attribute name="title" value="Account List"/>
+        <put-attribute name="body" value="/WEB-INF/pages/account/list.jsp"/>
+    </definition>
+
+    <definition name="account.view" extends="baseLayout">
+        <put-attribute name="title" value="View Account"/>
+        <put-attribute name="body" value="/WEB-INF/pages/account/view.jsp"/>
+    </definition>
+
+    <definition name="account.form" extends="baseLayout">
+        <put-attribute name="title" value="Account Form"/>
+        <put-attribute name="body" value="/WEB-INF/pages/account/form.jsp"/>
+    </definition>
+
+    <!-- Contact Pages -->
+    <definition name="contact.list" extends="baseLayout">
+        <put-attribute name="title" value="Contact List"/>
+        <put-attribute name="body" value="/WEB-INF/pages/contact/list.jsp"/>
+    </definition>
+
+    <definition name="contact.view" extends="baseLayout">
+        <put-attribute name="title" value="View Contact"/>
+        <put-attribute name="body" value="/WEB-INF/pages/contact/view.jsp"/>
+    </definition>
+
+    <definition name="contact.form" extends="baseLayout">
+        <put-attribute name="title" value="Contact Form"/>
+        <put-attribute name="body" value="/WEB-INF/pages/contact/form.jsp"/>
+    </definition>
+
+    <!-- Address Pages -->
+    <definition name="address.list" extends="baseLayout">
+        <put-attribute name="title" value="Address List"/>
+        <put-attribute name="body" value="/WEB-INF/pages/address/list.jsp"/>
+    </definition>
+
+    <definition name="address.view" extends="baseLayout">
+        <put-attribute name="title" value="View Address"/>
+        <put-attribute name="body" value="/WEB-INF/pages/address/view.jsp"/>
+    </definition>
+
+    <definition name="address.form" extends="baseLayout">
+        <put-attribute name="title" value="Address Form"/>
+        <put-attribute name="body" value="/WEB-INF/pages/address/form.jsp"/>
+    </definition>
+
+</tiles-definitions>
