@@ -24,7 +24,7 @@ services:
       POSTGRES_USER: sampleuser
       POSTGRES_DB: sampledb
       POSTGRES_HOST: jakarta-ee-db
-      POSTGRES_PORT: 5434
+      POSTGRES_PORT: 5432
 
     extra_hosts:
       - "host.docker.internal:host-gateway"
