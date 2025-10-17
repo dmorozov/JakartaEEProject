@@ -93,12 +93,6 @@
                 <artifactId>struts2-cdi-plugin</artifactId>
                 <version>${struts2.version}</version>
             </dependency>
-            <dependency>
-                <groupId>javax.enterprise</groupId>
-                <artifactId>cdi-api</artifactId>
-                <version>1.0-SP1</version>
-                <scope>provided</scope>
-            </dependency>
 
             <!-- Project Modules -->
             <dependency>

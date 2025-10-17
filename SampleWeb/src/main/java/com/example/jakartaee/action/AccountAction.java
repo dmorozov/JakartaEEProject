@@ -2,7 +2,6 @@ package com.example.jakartaee.action;
 
 import com.example.jakartaee.entity.Account;
 import com.example.jakartaee.service.AccountService;
-import com.example.jakartaee.services.AccountEjbService;
 
 import org.apache.struts2.ActionSupport;
 import org.apache.struts2.ModelDriven;
@@ -16,135 +15,132 @@ import java.util.List;
 @Named
 public class AccountAction extends ActionSupport implements ModelDriven<Account>, Preparable {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  @EJB
-  private AccountService accountService;
+    @EJB
+    private AccountService accountService;
 
-  @Inject
-  private AccountEjbService accountEjbService;
+    private Account account = new Account();
+    private List<Account> accounts;
+    private Long id;
 
-  private Account account = new Account();
-  private List<Account> accounts;
-  private Long id;
-
-  @Override
-  public void prepare() {
-    // Prepare method for Preparable interface
-  }
-
-  public String list() {
-    try {
-      accounts = accountEjbService.findAllAccounts();
-      return SUCCESS;
-    } catch (Exception e) {
-      addActionError("Error retrieving accounts: " + e.getMessage());
-      return ERROR;
-    }
-  }
-
-  public String view() {
-    if (id == null) {
-      addActionError("Account ID is required");
-      return INPUT;
+    @Override
+    public void prepare() {
+        // Prepare method for Preparable interface
     }
 
-    try {
-      account = accountService.findAccountById(id);
-      if (account == null) {
-        addActionError("Account not found with ID: " + id);
-        return INPUT;
-      }
-      return SUCCESS;
-    } catch (Exception e) {
-      addActionError("Error retrieving account: " + e.getMessage());
-      return ERROR;
-    }
-  }
-
-  public String create() {
-    account = new Account();
-    return SUCCESS;
-  }
-
-  public String edit() {
-    if (id == null) {
-      addActionError("Account ID is required");
-      return INPUT;
+    public String list() {
+        try {
+            accounts = accountService.findAllAccounts();
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Error retrieving accounts: " + e.getMessage());
+            return ERROR;
+        }
     }
 
-    try {
-      account = accountService.findAccountById(id);
-      if (account == null) {
-        addActionError("Account not found with ID: " + id);
-        return INPUT;
-      }
-      return SUCCESS;
-    } catch (Exception e) {
-      addActionError("Error retrieving account: " + e.getMessage());
-      return ERROR;
-    }
-  }
+    public String view() {
+        if (id == null) {
+            addActionError("Account ID is required");
+            return INPUT;
+        }
 
-  public String save() {
-    try {
-      if (account.getId() == null) {
-        accountService.createAccount(account);
-        addActionMessage("Account created successfully!");
-      } else {
-        accountService.updateAccount(account);
-        addActionMessage("Account updated successfully!");
-      }
-      return SUCCESS;
-    } catch (Exception e) {
-      addActionError("Error saving account: " + e.getMessage());
-      return INPUT;
-    }
-  }
-
-  public String delete() {
-    if (id == null) {
-      addActionError("Account ID is required");
-      return ERROR;
+        try {
+            account = accountService.findAccountById(id);
+            if (account == null) {
+                addActionError("Account not found with ID: " + id);
+                return INPUT;
+            }
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Error retrieving account: " + e.getMessage());
+            return ERROR;
+        }
     }
 
-    try {
-      accountService.deleteAccount(id);
-      addActionMessage("Account deleted successfully!");
-      return SUCCESS;
-    } catch (Exception e) {
-      addActionError("Error deleting account: " + e.getMessage());
-      return ERROR;
+    public String create() {
+        account = new Account();
+        return SUCCESS;
     }
-  }
 
-  @Override
-  public Account getModel() {
-    return account;
-  }
+    public String edit() {
+        if (id == null) {
+            addActionError("Account ID is required");
+            return INPUT;
+        }
 
-  // Getters and Setters
-  public Account getAccount() {
-    return account;
-  }
+        try {
+            account = accountService.findAccountById(id);
+            if (account == null) {
+                addActionError("Account not found with ID: " + id);
+                return INPUT;
+            }
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Error retrieving account: " + e.getMessage());
+            return ERROR;
+        }
+    }
 
-  public void setAccount(Account account) {
-    this.account = account;
-  }
+    public String save() {
+        try {
+            if (account.getId() == null) {
+                accountService.createAccount(account);
+                addActionMessage("Account created successfully!");
+            } else {
+                accountService.updateAccount(account);
+                addActionMessage("Account updated successfully!");
+            }
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Error saving account: " + e.getMessage());
+            return INPUT;
+        }
+    }
 
-  public List<Account> getAccounts() {
-    return accounts;
-  }
+    public String delete() {
+        if (id == null) {
+            addActionError("Account ID is required");
+            return ERROR;
+        }
 
-  public void setAccounts(List<Account> accounts) {
-    this.accounts = accounts;
-  }
+        try {
+            accountService.deleteAccount(id);
+            addActionMessage("Account deleted successfully!");
+            return SUCCESS;
+        } catch (Exception e) {
+            addActionError("Error deleting account: " + e.getMessage());
+            return ERROR;
+        }
+    }
 
-  public Long getId() {
-    return id;
-  }
+    @Override
+    public Account getModel() {
+        return account;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    // Getters and Setters
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

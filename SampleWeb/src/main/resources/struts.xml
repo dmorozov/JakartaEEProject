@@ -10,7 +10,9 @@
     <constant name="struts.ui.theme" value="simple"/>
     <constant name="struts.convention.default.parent.package" value="default"/>
     <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
-    <constant name="struts.objectFactory.cdi.jndiKey" value="java:comp/BeanManager" />
+
+    <!-- CDI Integration -->
+    <constant name="struts.objectFactory" value="cdi" />
 
     <!-- Tiles Plugin Configuration -->
     <constant name="struts.tiles.defaultLocale" value="en_US"/>
