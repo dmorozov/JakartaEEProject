@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <Resource id="jdbc/SampleDS" type="javax.sql.DataSource">
+        JdbcDriver org.postgresql.Driver
+        JdbcUrl jdbc:postgresql://localhost:5434/sampledb
+        UserName sampleuser
+        Password samplepass
+        JtaManaged true
+        InitialSize 5
+        MaxTotal 20
+        MaxIdle 10
+        MinIdle 5
+        MaxWaitMillis 10000
+        TestOnBorrow true
+        ValidationQuery SELECT 1
+    </Resource>
+</resources>
