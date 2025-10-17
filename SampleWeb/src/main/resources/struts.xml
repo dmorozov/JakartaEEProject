@@ -6,7 +6,7 @@
 <struts>
     <!-- Configuration -->
     <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
-    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.devMode" value="true"/>
     <constant name="struts.ui.theme" value="simple"/>
     <constant name="struts.convention.default.parent.package" value="default"/>
     <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>

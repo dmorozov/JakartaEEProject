@@ -53,6 +53,7 @@
                 <configuration>
                     <version>10</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <skinnyWars>false</skinnyWars>
 
                     <modules>
                         <jarModule>

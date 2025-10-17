@@ -27,6 +27,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     @Override
     public void prepare() {
         // Prepare method for Preparable interface
+  
     }
 
     public String list() {

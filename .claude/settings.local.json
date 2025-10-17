@@ -7,7 +7,10 @@
       "Bash(./mvnw:*)",
       "Bash(cat:*)",
       "Bash(javap:*)",
-      "Read(//usr/lib/jvm/**)"
+      "Read(//usr/lib/jvm/**)",
+      "Bash(unzip:*)",
+      "Bash(../mvnw dependency:tree:*)",
+      "Bash(jar:*)"
     ],
     "deny": [],
     "ask": []
