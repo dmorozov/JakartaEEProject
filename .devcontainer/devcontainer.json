@@ -43,7 +43,9 @@
         "naumovs.color-highlight", // Color Highlight
         "esbenp.prettier-vscode", // Prettier code formatter
         "dotdevru.prettier-java", // Prettier Java plugin
-        "tlintrami.vscode-jstl-jsp"
+        "tlintrami.vscode-jstl-jsp",
+        "J0hnMilt0n.vscode-jsp-clone",
+        "samuel-weinhardt.vscode-jsp-lang"
       ]
     }
   },
