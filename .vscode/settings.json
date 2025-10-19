@@ -36,5 +36,22 @@
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
   "java.format.settings.profile": "GoogleStyle",
-  "java.compile.nullAnalysis.mode": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "rsp-ui.enableStartServerOnActivation": [
+    {
+      "id": "redhat.vscode-community-server-connector",
+      "name": "Community Server Connector",
+      "startOnActivation": true
+    }
+  ],
+  "sonarlint.rules": {
+    "java:S1948": {
+      "level": "off"
+    }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "database-client.autoSync": true,
 }
