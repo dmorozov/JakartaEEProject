@@ -45,7 +45,8 @@
         "dotdevru.prettier-java", // Prettier Java plugin
         "tlintrami.vscode-jstl-jsp",
         "J0hnMilt0n.vscode-jsp-clone",
-        "samuel-weinhardt.vscode-jsp-lang"
+        "samuel-weinhardt.vscode-jsp-lang",
+        "SonarSource.sonarlint-vscode"
       ]
     }
   },

@@ -571,3 +571,7 @@ This project is provided as-is for educational and development purposes.
 ## Author
 
 Created as a comprehensive JakartaEE 10 sample application demonstrating modern enterprise Java development practices.
+
+Install JSP formatter:
+npm install --save-dev --save-exact prettier
+npm install --save-dev prettier-plugin-jsp
