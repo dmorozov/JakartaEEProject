@@ -1,9 +1,23 @@
 package com.example.jakartaee.entity;
 
-import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.jakartaee.EntityConstants;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "contacts")
@@ -20,16 +34,16 @@ public class Contact implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false, length = 50)
+    @Column(name = "first_name", nullable = false, length = EntityConstants.COLUMN_LENGTH_50)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 50)
+    @Column(name = "last_name", nullable = false, length = EntityConstants.COLUMN_LENGTH_50)
     private String lastName;
 
-    @Column(length = 20)
+    @Column(length = EntityConstants.COLUMN_LENGTH_50)
     private String phone;
 
-    @Column(length = 150)
+    @Column(length = EntityConstants.COLUMN_EMAIL)
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,108 +55,109 @@ public class Contact implements Serializable {
 
     // Constructors
     public Contact() {
+      // default constructor
     }
 
-    public Contact(String firstName, String lastName, String phone, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
+    public Contact(final String firstName, final String lastName, final String phone,
+        final String email) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.phone = phone;
+      this.email = email;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public final Long getId() {
+      return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public final void setId(final Long id) {
+      this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public final String getFirstName() {
+      return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public final void setFirstName(final String firstName) {
+      this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public final String getLastName() {
+      return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public final void setLastName(final String lastName) {
+      this.lastName = lastName;
     }
 
-    public String getPhone() {
-        return phone;
+    public final String getPhone() {
+      return phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public final void setPhone(final String phone) {
+      this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public final String getEmail() {
+      return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public final void setEmail(final String email) {
+      this.email = email;
     }
 
-    public Account getAccount() {
-        return account;
+    public final Account getAccount() {
+      return account;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public final void setAccount(final Account account) {
+      this.account = account;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public final List<Address> getAddresses() {
+      return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public final void setAddresses(final List<Address> addresses) {
+      this.addresses = addresses;
     }
 
     // Helper methods
-    public void addAddress(Address address) {
-        addresses.add(address);
-        address.setContact(this);
+    public final void addAddress(final Address address) {
+      addresses.add(address);
+      address.setContact(this);
     }
 
-    public void removeAddress(Address address) {
-        addresses.remove(address);
-        address.setContact(null);
+    public final void removeAddress(final Address address) {
+      addresses.remove(address);
+      address.setContact(null);
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Contact)) return false;
-        Contact contact = (Contact) o;
-        return id != null && id.equals(contact.id);
+    public final String getFullName() {
+      return firstName + " " + lastName;
     }
 
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public final boolean equals(final Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof Contact)) {
+        return false;
+      }
+      Contact contact = (Contact) o;
+      return id != null && id.equals(contact.id);
     }
 
     @Override
-    public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public final int hashCode() {
+      return getClass().hashCode();
+    }
+
+    @Override
+    public final String toString() {
+      return "Contact{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='"
+          + lastName + '\'' + ", phone='" + phone + '\'' + ", email='" + email + '\'' + '}';
     }
 }

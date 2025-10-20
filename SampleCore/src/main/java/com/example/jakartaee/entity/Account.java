@@ -1,10 +1,22 @@
 package com.example.jakartaee.entity;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.jakartaee.EntityConstants;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "accounts")
@@ -20,10 +32,10 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = EntityConstants.COLUMN_LENGTH_100)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(nullable = false, unique = true, length = EntityConstants.COLUMN_EMAIL)
     private String email;
 
     @Column(name = "created_date", nullable = false, updatable = false)
@@ -33,91 +45,92 @@ public class Account implements Serializable {
     private List<Contact> contacts = new ArrayList<>();
 
     @PrePersist
-    protected void onCreate() {
-        createdDate = LocalDateTime.now();
+    protected final void onCreate() {
+      createdDate = LocalDateTime.now();
     }
 
     // Constructors
     public Account() {
+      // default constructor
     }
 
-    public Account(String name, String email) {
-        this.name = name;
-        this.email = email;
+    public Account(final String name, final String email) {
+      this.name = name;
+      this.email = email;
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public final Long getId() {
+      return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public final void setId(final Long id) {
+      this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public final String getName() {
+      return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public final void setName(final String name) {
+      this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public final String getEmail() {
+      return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public final void setEmail(final String email) {
+      this.email = email;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public final LocalDateTime getCreatedDate() {
+      return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
+    public final void setCreatedDate(final LocalDateTime createdDate) {
+      this.createdDate = createdDate;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public final List<Contact> getContacts() {
+      return contacts;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public final void setContacts(final List<Contact> contacts) {
+      this.contacts = contacts;
     }
 
     // Helper methods
-    public void addContact(Contact contact) {
-        contacts.add(contact);
-        contact.setAccount(this);
+    public final void addContact(final Contact contact) {
+      contacts.add(contact);
+      contact.setAccount(this);
     }
 
-    public void removeContact(Contact contact) {
-        contacts.remove(contact);
-        contact.setAccount(null);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Account)) return false;
-        Account account = (Account) o;
-        return id != null && id.equals(account.id);
+    public final void removeContact(final Contact contact) {
+      contacts.remove(contact);
+      contact.setAccount(null);
     }
 
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public final boolean equals(final Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof Account)) {
+        return false;
+      }
+      Account account = (Account) o;
+      return id != null && id.equals(account.id);
     }
 
     @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", createdDate=" + createdDate +
-                '}';
+    public final int hashCode() {
+      return getClass().hashCode();
+    }
+
+    @Override
+    public final String toString() {
+      return "Account{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\''
+          + ", createdDate=" + createdDate + '}';
     }
 }
