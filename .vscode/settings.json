@@ -44,14 +44,17 @@
       "startOnActivation": true
     }
   ],
-  "sonarlint.rules": {
-    "java:S1948": {
-      "level": "off"
-    }
-  },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontFamily": "MesloLGS NF",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "database-client.autoSync": true,
+  "sonarlint.connectedMode.project": {
+    "projectKey": "JakartaEEProject"
+  },
+  "sonarlint.rules": {
+    "java:S1948": {
+      "level": "off"
+    }
+  },
 }
