@@ -29,7 +29,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
 
   }
 
-  public String list() {
+  public final String list() {
     try {
       accounts = accountService.findAllAccounts();
       return SUCCESS;
@@ -39,7 +39,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     }
   }
 
-  public String view() {
+  public final String view() {
     if (id == null) {
       addActionError("Account ID is required");
       return INPUT;
@@ -58,12 +58,12 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     }
   }
 
-  public String create() {
+  public final String create() {
     account = new Account();
     return SUCCESS;
   }
 
-  public String edit() {
+  public final String edit() {
     if (id == null) {
       addActionError("Account ID is required");
       return INPUT;
@@ -82,7 +82,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     }
   }
 
-  public String save() {
+  public final String save() {
     try {
       if (account.getId() == null) {
         accountService.createAccount(account);
@@ -98,7 +98,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     }
   }
 
-  public String delete() {
+  public final String delete() {
     if (id == null) {
       addActionError("Account ID is required");
       return ERROR;
@@ -115,32 +115,32 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
   }
 
   @Override
-  public Account getModel() {
+  public final Account getModel() {
     return account;
   }
 
   // Getters and Setters
-  public Account getAccount() {
+  public final Account getAccount() {
     return account;
   }
 
-  public void setAccount(Account account) {
+  public final void setAccount(final Account account) {
     this.account = account;
   }
 
-  public List<Account> getAccounts() {
+  public final List<Account> getAccounts() {
     return accounts;
   }
 
-  public void setAccounts(List<Account> accounts) {
+  public final void setAccounts(final List<Account> accounts) {
     this.accounts = accounts;
   }
 
-  public Long getId() {
+  public final Long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public final void setId(final Long id) {
     this.id = id;
   }
 }

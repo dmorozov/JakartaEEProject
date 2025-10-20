@@ -11,60 +11,64 @@ import java.util.logging.Logger;
 @Stateless
 public class HelloWorldBean implements HelloWorldRemote {
 
-    private static final Logger logger = Logger.getLogger(HelloWorldBean.class.getName());
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  private static final Logger LOG = Logger.getLogger(HelloWorldBean.class.getName());
+  private static final DateTimeFormatter FORMATTER =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    @PostConstruct
-    public void init() {
-        logger.info("HelloWorldBean initialized");
+  @PostConstruct
+  public final void init() {
+    LOG.info("HelloWorldBean initialized");
+  }
+
+  @PreDestroy
+  public final void destroy() {
+    LOG.info("HelloWorldBean destroyed");
+  }
+
+  @Override
+  @PermitAll
+  public final String sayHello(final String nameValue) {
+    LOG.info("sayHello called with name: " + nameValue);
+
+    String name = nameValue;
+    if (name == null || name.trim().isEmpty()) {
+      name = "World";
     }
 
-    @PreDestroy
-    public void destroy() {
-        logger.info("HelloWorldBean destroyed");
+    String message = "Hello, " + name + "! Welcome to JakartaEE 10 Remote EJB.";
+    LOG.info("Returning message: " + message);
+
+    return message;
+  }
+
+  @Override
+  @PermitAll
+  public final String getServerTime() {
+    LOG.info("getServerTime called");
+
+    LocalDateTime now = LocalDateTime.now();
+    String timeString = now.format(FORMATTER);
+
+    String message = "Current server time: " + timeString;
+    LOG.info("Returning: " + message);
+
+    return message;
+  }
+
+  @Override
+  @PermitAll
+  public final String processMessage(final String messageValue) {
+    LOG.info("processMessage called with: " + messageValue);
+
+    String message = messageValue;
+    if (message == null) {
+      message = "";
     }
 
-    @Override
-    @PermitAll
-    public String sayHello(String name) {
-        logger.info("sayHello called with name: " + name);
+    String processed =
+        "Processed: [" + message.toUpperCase() + "] at " + LocalDateTime.now().format(FORMATTER);
+    LOG.info("Returning processed message: " + processed);
 
-        if (name == null || name.trim().isEmpty()) {
-            name = "World";
-        }
-
-        String message = "Hello, " + name + "! Welcome to JakartaEE 10 Remote EJB.";
-        logger.info("Returning message: " + message);
-
-        return message;
-    }
-
-    @Override
-    @PermitAll
-    public String getServerTime() {
-        logger.info("getServerTime called");
-
-        LocalDateTime now = LocalDateTime.now();
-        String timeString = now.format(formatter);
-
-        String message = "Current server time: " + timeString;
-        logger.info("Returning: " + message);
-
-        return message;
-    }
-
-    @Override
-    @PermitAll
-    public String processMessage(String message) {
-        logger.info("processMessage called with: " + message);
-
-        if (message == null) {
-            message = "";
-        }
-
-        String processed = "Processed: [" + message.toUpperCase() + "] at " + LocalDateTime.now().format(formatter);
-        logger.info("Returning processed message: " + processed);
-
-        return processed;
-    }
+    return processed;
+  }
 }

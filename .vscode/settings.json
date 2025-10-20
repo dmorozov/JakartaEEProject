@@ -10,9 +10,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
-  "eslint.workingDirectories": [
-    "./app/src/main/webui"
-  ],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
@@ -49,12 +46,11 @@
   "terminal.integrated.fontFamily": "MesloLGS NF",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "database-client.autoSync": true,
-  "sonarlint.connectedMode.project": {
-    "projectKey": "JakartaEEProject"
-  },
-  "sonarlint.rules": {
-    "java:S1948": {
-      "level": "off"
-    }
-  },
+  "javaPMD.rulesets": [
+    ".vscode/pmd-ruleset.xml"
+  ],
+  "java.checkstyle.configuration": "${workspaceFolder}/.vscode/checkstyle.xml",
+  "java.checkstyle.version": "10.19.0",
+  "telemetry.enableTelemetry": false,
+  "telemetry.telemetryLevel": "off",
 }

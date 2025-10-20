@@ -1,9 +1,6 @@
 package com.example.jakartaee.service;
 
 import com.example.jakartaee.entity.Account;
-import jakarta.annotation.security.DeclareRoles;
-import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
@@ -18,72 +15,76 @@ import java.util.logging.Logger;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class AccountServiceBean implements AccountService {
 
-    private static final Logger logger = Logger.getLogger(AccountServiceBean.class.getName());
+  private static final Logger LOG = Logger.getLogger(AccountServiceBean.class.getName());
 
     @PersistenceContext(unitName = "SamplePU")
     private EntityManager entityManager;
 
+
+    // @RolesAllowed({"admin", "user"})
     @Override
-    //@RolesAllowed({"admin", "user"})
-    public Account createAccount(Account account) {
-        logger.info("Creating new account: " + account.getName());
-        entityManager.persist(account);
-        entityManager.flush();
-        return account;
+    public final Account createAccount(final Account account) {
+      LOG.info("Creating new account: " + account.getName());
+      entityManager.persist(account);
+      entityManager.flush();
+      return account;
+    }
+
+
+    // @RolesAllowed({"admin", "user"})
+    @Override
+    public final Account updateAccount(final Account account) {
+      LOG.info("Updating account with ID: " + account.getId());
+      Account merged = entityManager.merge(account);
+      entityManager.flush();
+      return merged;
+    }
+
+
+    // @RolesAllowed("admin")
+    @Override
+    public final void deleteAccount(final Long id) {
+      LOG.info("Deleting account with ID: " + id);
+      Account account = entityManager.find(Account.class, id);
+      if (account != null) {
+        entityManager.remove(account);
+      }
     }
 
     @Override
-    //@RolesAllowed({"admin", "user"})
-    public Account updateAccount(Account account) {
-        logger.info("Updating account with ID: " + account.getId());
-        Account merged = entityManager.merge(account);
-        entityManager.flush();
-        return merged;
-    }
-
-    @Override
-    //@RolesAllowed("admin")
-    public void deleteAccount(Long id) {
-        logger.info("Deleting account with ID: " + id);
-        Account account = entityManager.find(Account.class, id);
-        if (account != null) {
-            entityManager.remove(account);
-        }
-    }
-
-    @Override
-    //@PermitAll
+    // @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Account findAccountById(Long id) {
-        logger.info("Finding account by ID: " + id);
-        return entityManager.find(Account.class, id);
+    public final Account findAccountById(final Long id) {
+      LOG.info("Finding account by ID: " + id);
+      return entityManager.find(Account.class, id);
     }
 
     @Override
-    //@PermitAll
+    // @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Account findAccountByEmail(String email) {
-        logger.info("Finding account by email: " + email);
-        TypedQuery<Account> query = entityManager.createNamedQuery("Account.findByEmail", Account.class);
-        query.setParameter("email", email);
-        List<Account> results = query.getResultList();
-        return results.isEmpty() ? null : results.get(0);
+    public final Account findAccountByEmail(final String email) {
+      LOG.info("Finding account by email: " + email);
+      TypedQuery<Account> query =
+          entityManager.createNamedQuery("Account.findByEmail", Account.class);
+      query.setParameter("email", email);
+      List<Account> results = query.getResultList();
+      return results.isEmpty() ? null : results.get(0);
     }
 
     @Override
-    //@PermitAll
+    // @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Account> findAllAccounts() {
-        logger.info("Finding all accounts");
-        TypedQuery<Account> query = entityManager.createNamedQuery("Account.findAll", Account.class);
-        return query.getResultList();
+    public final List<Account> findAllAccounts() {
+      LOG.info("Finding all accounts");
+      TypedQuery<Account> query = entityManager.createNamedQuery("Account.findAll", Account.class);
+      return query.getResultList();
     }
 
     @Override
-    //@PermitAll
+    // @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public long countAccounts() {
-        logger.info("Counting all accounts");
+    public final long countAccounts() {
+      LOG.info("Counting all accounts");
         TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(a) FROM Account a", Long.class);
         return query.getSingleResult();
     }

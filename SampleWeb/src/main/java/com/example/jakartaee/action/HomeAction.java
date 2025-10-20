@@ -12,16 +12,16 @@ public class HomeAction extends ActionSupport {
     private String message;
 
     @Override
-    public String execute() {
-        message = "Welcome to JakartaEE 10 with Struts 7!";
-        return SUCCESS;
+    public final String execute() {
+      message = "Welcome to JakartaEE 10 with Struts 7!";
+      return SUCCESS;
     }
 
-    public String getMessage() {
-        return message;
+    public final String getMessage() {
+      return message;
     }
 
-    public void setMessage(String message) {
+    public final void setMessage(final String message) {
         this.message = message;
     }
 }

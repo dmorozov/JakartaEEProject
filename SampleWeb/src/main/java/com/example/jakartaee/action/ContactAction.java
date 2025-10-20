@@ -30,161 +30,161 @@ public class ContactAction extends ActionSupport implements ModelDriven<Contact>
     private Long accountId;
 
     @Override
-    public void prepare() {
-        // Load accounts for dropdown in form
-        try {
-            accounts = accountService.findAllAccounts();
-        } catch (Exception e) {
-            addActionError("Error loading accounts: " + e.getMessage());
-        }
+    public final void prepare() {
+      // Load accounts for dropdown in form
+      try {
+        accounts = accountService.findAllAccounts();
+      } catch (Exception e) {
+        addActionError("Error loading accounts: " + e.getMessage());
+      }
     }
 
-    public String list() {
-        try {
-            if (accountId != null) {
-                contacts = contactService.findContactsByAccountId(accountId);
-            } else {
-                contacts = contactService.findAllContacts();
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error retrieving contacts: " + e.getMessage());
-            return ERROR;
+    public final String list() {
+      try {
+        if (accountId != null) {
+          contacts = contactService.findContactsByAccountId(accountId);
+        } else {
+          contacts = contactService.findAllContacts();
         }
-    }
-
-    public String view() {
-        if (id == null) {
-            addActionError("Contact ID is required");
-            return INPUT;
-        }
-
-        try {
-            contact = contactService.findContactById(id);
-            if (contact == null) {
-                addActionError("Contact not found with ID: " + id);
-                return INPUT;
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error retrieving contact: " + e.getMessage());
-            return ERROR;
-        }
-    }
-
-    public String create() {
-        contact = new Contact();
         return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error retrieving contacts: " + e.getMessage());
+        return ERROR;
+      }
     }
 
-    public String edit() {
-        if (id == null) {
-            addActionError("Contact ID is required");
+    public final String view() {
+      if (id == null) {
+        addActionError("Contact ID is required");
+        return INPUT;
+      }
+
+      try {
+        contact = contactService.findContactById(id);
+        if (contact == null) {
+          addActionError("Contact not found with ID: " + id);
+          return INPUT;
+        }
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error retrieving contact: " + e.getMessage());
+        return ERROR;
+      }
+    }
+
+    public final String create() {
+      contact = new Contact();
+      return SUCCESS;
+    }
+
+    public final String edit() {
+      if (id == null) {
+        addActionError("Contact ID is required");
+        return INPUT;
+      }
+
+      try {
+        contact = contactService.findContactById(id);
+        if (contact == null) {
+          addActionError("Contact not found with ID: " + id);
+          return INPUT;
+        }
+        if (contact.getAccount() != null) {
+          accountId = contact.getAccount().getId();
+        }
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error retrieving contact: " + e.getMessage());
+        return ERROR;
+      }
+    }
+
+    public final String save() {
+      try {
+        // Set account if accountId is provided
+        if (accountId != null) {
+          Account account = accountService.findAccountById(accountId);
+          if (account != null) {
+            contact.setAccount(account);
+          } else {
+            addActionError("Invalid account selected");
             return INPUT;
+          }
         }
 
-        try {
-            contact = contactService.findContactById(id);
-            if (contact == null) {
-                addActionError("Contact not found with ID: " + id);
-                return INPUT;
-            }
-            if (contact.getAccount() != null) {
-                accountId = contact.getAccount().getId();
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error retrieving contact: " + e.getMessage());
-            return ERROR;
+        if (contact.getId() == null) {
+          contactService.createContact(contact);
+          addActionMessage("Contact created successfully!");
+        } else {
+          contactService.updateContact(contact);
+          addActionMessage("Contact updated successfully!");
         }
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error saving contact: " + e.getMessage());
+        return INPUT;
+      }
     }
 
-    public String save() {
-        try {
-            // Set account if accountId is provided
-            if (accountId != null) {
-                Account account = accountService.findAccountById(accountId);
-                if (account != null) {
-                    contact.setAccount(account);
-                } else {
-                    addActionError("Invalid account selected");
-                    return INPUT;
-                }
-            }
+    public final String delete() {
+      if (id == null) {
+        addActionError("Contact ID is required");
+        return ERROR;
+      }
 
-            if (contact.getId() == null) {
-                contactService.createContact(contact);
-                addActionMessage("Contact created successfully!");
-            } else {
-                contactService.updateContact(contact);
-                addActionMessage("Contact updated successfully!");
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error saving contact: " + e.getMessage());
-            return INPUT;
-        }
-    }
-
-    public String delete() {
-        if (id == null) {
-            addActionError("Contact ID is required");
-            return ERROR;
-        }
-
-        try {
-            contactService.deleteContact(id);
-            addActionMessage("Contact deleted successfully!");
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error deleting contact: " + e.getMessage());
-            return ERROR;
-        }
+      try {
+        contactService.deleteContact(id);
+        addActionMessage("Contact deleted successfully!");
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error deleting contact: " + e.getMessage());
+        return ERROR;
+      }
     }
 
     @Override
-    public Contact getModel() {
-        return contact;
+    public final Contact getModel() {
+      return contact;
     }
 
     // Getters and Setters
-    public Contact getContact() {
-        return contact;
+    public final Contact getContact() {
+      return contact;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public final void setContact(final Contact contact) {
+      this.contact = contact;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public final List<Contact> getContacts() {
+      return contacts;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public final void setContacts(final List<Contact> contacts) {
+      this.contacts = contacts;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public final List<Account> getAccounts() {
+      return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public final void setAccounts(final List<Account> accounts) {
+      this.accounts = accounts;
     }
 
-    public Long getId() {
-        return id;
+    public final Long getId() {
+      return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public final void setId(final Long id) {
+      this.id = id;
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public final Long getAccountId() {
+      return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public final void setAccountId(final Long accountId) {
         this.accountId = accountId;
     }
 }

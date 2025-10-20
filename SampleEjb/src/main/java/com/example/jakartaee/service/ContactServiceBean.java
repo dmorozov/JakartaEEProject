@@ -18,71 +18,72 @@ import java.util.logging.Logger;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class ContactServiceBean implements ContactService {
 
-    private static final Logger logger = Logger.getLogger(ContactServiceBean.class.getName());
+  private static final Logger LOG = Logger.getLogger(ContactServiceBean.class.getName());
 
     @PersistenceContext(unitName = "SamplePU")
     private EntityManager entityManager;
 
     @Override
     @RolesAllowed({"admin", "user"})
-    public Contact createContact(Contact contact) {
-        logger.info("Creating new contact: " + contact.getFullName());
-        entityManager.persist(contact);
-        entityManager.flush();
-        return contact;
+    public final Contact createContact(final Contact contact) {
+      LOG.info("Creating new contact: " + contact.getFullName());
+      entityManager.persist(contact);
+      entityManager.flush();
+      return contact;
     }
 
     @Override
     @RolesAllowed({"admin", "user"})
-    public Contact updateContact(Contact contact) {
-        logger.info("Updating contact with ID: " + contact.getId());
-        Contact merged = entityManager.merge(contact);
-        entityManager.flush();
-        return merged;
+    public final Contact updateContact(final Contact contact) {
+      LOG.info("Updating contact with ID: " + contact.getId());
+      Contact merged = entityManager.merge(contact);
+      entityManager.flush();
+      return merged;
     }
 
     @Override
     @RolesAllowed("admin")
-    public void deleteContact(Long id) {
-        logger.info("Deleting contact with ID: " + id);
-        Contact contact = entityManager.find(Contact.class, id);
-        if (contact != null) {
-            entityManager.remove(contact);
-        }
+    public final void deleteContact(final Long id) {
+      LOG.info("Deleting contact with ID: " + id);
+      Contact contact = entityManager.find(Contact.class, id);
+      if (contact != null) {
+        entityManager.remove(contact);
+      }
     }
 
     @Override
     @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Contact findContactById(Long id) {
-        logger.info("Finding contact by ID: " + id);
-        return entityManager.find(Contact.class, id);
+    public final Contact findContactById(final Long id) {
+      LOG.info("Finding contact by ID: " + id);
+      return entityManager.find(Contact.class, id);
     }
 
     @Override
     @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Contact> findAllContacts() {
-        logger.info("Finding all contacts");
-        TypedQuery<Contact> query = entityManager.createNamedQuery("Contact.findAll", Contact.class);
-        return query.getResultList();
+    public final List<Contact> findAllContacts() {
+      LOG.info("Finding all contacts");
+      TypedQuery<Contact> query = entityManager.createNamedQuery("Contact.findAll", Contact.class);
+      return query.getResultList();
     }
 
     @Override
     @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Contact> findContactsByAccountId(Long accountId) {
-        logger.info("Finding contacts for account ID: " + accountId);
-        TypedQuery<Contact> query = entityManager.createNamedQuery("Contact.findByAccount", Contact.class);
-        query.setParameter("accountId", accountId);
-        return query.getResultList();
+    public final List<Contact> findContactsByAccountId(final Long accountId) {
+      LOG.info("Finding contacts for account ID: " + accountId);
+      TypedQuery<Contact> query =
+          entityManager.createNamedQuery("Contact.findByAccount", Contact.class);
+      query.setParameter("accountId", accountId);
+      return query.getResultList();
     }
 
     @Override
     @PermitAll
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public long countContacts() {
-        logger.info("Counting all contacts");
+    public final long countContacts() {
+      LOG.info("Counting all contacts");
         TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(c) FROM Contact c", Long.class);
         return query.getSingleResult();
     }

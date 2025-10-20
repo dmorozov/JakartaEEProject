@@ -30,161 +30,161 @@ public class AddressAction extends ActionSupport implements ModelDriven<Address>
     private Long contactId;
 
     @Override
-    public void prepare() {
-        // Load contacts for dropdown in form
-        try {
-            contacts = contactService.findAllContacts();
-        } catch (Exception e) {
-            addActionError("Error loading contacts: " + e.getMessage());
-        }
+    public final void prepare() {
+      // Load contacts for dropdown in form
+      try {
+        contacts = contactService.findAllContacts();
+      } catch (Exception e) {
+        addActionError("Error loading contacts: " + e.getMessage());
+      }
     }
 
-    public String list() {
-        try {
-            if (contactId != null) {
-                addresses = addressService.findAddressesByContactId(contactId);
-            } else {
-                addresses = addressService.findAllAddresses();
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error retrieving addresses: " + e.getMessage());
-            return ERROR;
+    public final String list() {
+      try {
+        if (contactId != null) {
+          addresses = addressService.findAddressesByContactId(contactId);
+        } else {
+          addresses = addressService.findAllAddresses();
         }
-    }
-
-    public String view() {
-        if (id == null) {
-            addActionError("Address ID is required");
-            return INPUT;
-        }
-
-        try {
-            address = addressService.findAddressById(id);
-            if (address == null) {
-                addActionError("Address not found with ID: " + id);
-                return INPUT;
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error retrieving address: " + e.getMessage());
-            return ERROR;
-        }
-    }
-
-    public String create() {
-        address = new Address();
         return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error retrieving addresses: " + e.getMessage());
+        return ERROR;
+      }
     }
 
-    public String edit() {
-        if (id == null) {
-            addActionError("Address ID is required");
+    public final String view() {
+      if (id == null) {
+        addActionError("Address ID is required");
+        return INPUT;
+      }
+
+      try {
+        address = addressService.findAddressById(id);
+        if (address == null) {
+          addActionError("Address not found with ID: " + id);
+          return INPUT;
+        }
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error retrieving address: " + e.getMessage());
+        return ERROR;
+      }
+    }
+
+    public final String create() {
+      address = new Address();
+      return SUCCESS;
+    }
+
+    public final String edit() {
+      if (id == null) {
+        addActionError("Address ID is required");
+        return INPUT;
+      }
+
+      try {
+        address = addressService.findAddressById(id);
+        if (address == null) {
+          addActionError("Address not found with ID: " + id);
+          return INPUT;
+        }
+        if (address.getContact() != null) {
+          contactId = address.getContact().getId();
+        }
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error retrieving address: " + e.getMessage());
+        return ERROR;
+      }
+    }
+
+    public final String save() {
+      try {
+        // Set contact if contactId is provided
+        if (contactId != null) {
+          Contact contact = contactService.findContactById(contactId);
+          if (contact != null) {
+            address.setContact(contact);
+          } else {
+            addActionError("Invalid contact selected");
             return INPUT;
+          }
         }
 
-        try {
-            address = addressService.findAddressById(id);
-            if (address == null) {
-                addActionError("Address not found with ID: " + id);
-                return INPUT;
-            }
-            if (address.getContact() != null) {
-                contactId = address.getContact().getId();
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error retrieving address: " + e.getMessage());
-            return ERROR;
+        if (address.getId() == null) {
+          addressService.createAddress(address);
+          addActionMessage("Address created successfully!");
+        } else {
+          addressService.updateAddress(address);
+          addActionMessage("Address updated successfully!");
         }
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error saving address: " + e.getMessage());
+        return INPUT;
+      }
     }
 
-    public String save() {
-        try {
-            // Set contact if contactId is provided
-            if (contactId != null) {
-                Contact contact = contactService.findContactById(contactId);
-                if (contact != null) {
-                    address.setContact(contact);
-                } else {
-                    addActionError("Invalid contact selected");
-                    return INPUT;
-                }
-            }
+    public final String delete() {
+      if (id == null) {
+        addActionError("Address ID is required");
+        return ERROR;
+      }
 
-            if (address.getId() == null) {
-                addressService.createAddress(address);
-                addActionMessage("Address created successfully!");
-            } else {
-                addressService.updateAddress(address);
-                addActionMessage("Address updated successfully!");
-            }
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error saving address: " + e.getMessage());
-            return INPUT;
-        }
-    }
-
-    public String delete() {
-        if (id == null) {
-            addActionError("Address ID is required");
-            return ERROR;
-        }
-
-        try {
-            addressService.deleteAddress(id);
-            addActionMessage("Address deleted successfully!");
-            return SUCCESS;
-        } catch (Exception e) {
-            addActionError("Error deleting address: " + e.getMessage());
-            return ERROR;
-        }
+      try {
+        addressService.deleteAddress(id);
+        addActionMessage("Address deleted successfully!");
+        return SUCCESS;
+      } catch (Exception e) {
+        addActionError("Error deleting address: " + e.getMessage());
+        return ERROR;
+      }
     }
 
     @Override
-    public Address getModel() {
-        return address;
+    public final Address getModel() {
+      return address;
     }
 
     // Getters and Setters
-    public Address getAddress() {
-        return address;
+    public final Address getAddress() {
+      return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public final void setAddress(final Address address) {
+      this.address = address;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public final List<Address> getAddresses() {
+      return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public final void setAddresses(final List<Address> addresses) {
+      this.addresses = addresses;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public final List<Contact> getContacts() {
+      return contacts;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public final void setContacts(final List<Contact> contacts) {
+      this.contacts = contacts;
     }
 
-    public Long getId() {
-        return id;
+    public final Long getId() {
+      return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public final void setId(final Long id) {
+      this.id = id;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public final Long getContactId() {
+      return contactId;
     }
 
-    public void setContactId(Long contactId) {
+    public final void setContactId(final Long contactId) {
         this.contactId = contactId;
     }
 }
