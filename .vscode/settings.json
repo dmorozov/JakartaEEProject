@@ -49,7 +49,7 @@
   "javaPMD.rulesets": [
     ".vscode/pmd-ruleset.xml"
   ],
-  "java.checkstyle.configuration": "${workspaceFolder}/.vscode/checkstyle.xml",
+  "java.checkstyle.configuration": ".vscode/checkstyle.xml",
   "java.checkstyle.version": "10.19.0",
   "telemetry.enableTelemetry": false,
   "telemetry.telemetryLevel": "off",
