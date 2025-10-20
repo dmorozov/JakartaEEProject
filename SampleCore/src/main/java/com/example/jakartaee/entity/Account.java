@@ -45,7 +45,7 @@ public class Account implements Serializable {
     private List<Contact> contacts = new ArrayList<>();
 
     @PrePersist
-    protected final void onCreate() {
+    protected void onCreate() {
       createdDate = LocalDateTime.now();
     }
 

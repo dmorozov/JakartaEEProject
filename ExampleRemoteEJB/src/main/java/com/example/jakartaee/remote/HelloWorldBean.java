@@ -15,13 +15,19 @@ public class HelloWorldBean implements HelloWorldRemote {
   private static final DateTimeFormatter FORMATTER =
       DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+  /**
+   * Init EJB hook.
+   */
   @PostConstruct
-  public final void init() {
+  public void init() {
     LOG.info("HelloWorldBean initialized");
   }
 
+  /**
+   * Pre-destroy EJB hook.
+   */
   @PreDestroy
-  public final void destroy() {
+  public void destroy() {
     LOG.info("HelloWorldBean destroyed");
   }
 

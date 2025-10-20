@@ -185,7 +185,7 @@
             <consoleOutput>true</consoleOutput>
             <!-- Fail the build on a violation. The goal checks for the violations after logging
             them (if logViolationsToConsole is true) -->
-            <failOnViolation>false</failOnViolation>
+            <failOnViolation>true</failOnViolation>
             <logViolationsToConsole>true</logViolationsToConsole>
             <linkXRef>false</linkXRef>
           </configuration>
