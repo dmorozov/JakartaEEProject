@@ -44,6 +44,7 @@
         "esbenp.prettier-vscode", // Prettier code formatter
         "dotdevru.prettier-java", // Prettier Java plugin
         "DebrajBhal.jstl-snippets-by-deb", // JSTL snippets
+        "Shkrew.jstlsnippets", // JSTL snippets
         "J0hnMilt0n.vscode-jsp-clone",
         "samuel-weinhardt.vscode-jsp-lang",
         "shengchen.vscode-checkstyle", // CheckStyle for Java

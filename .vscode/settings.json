@@ -24,6 +24,9 @@
     "*.jsp": "jsp",
     "*.tag": "jsp"
   },
+  "emmet.includeLanguages": {
+    "jsp": "html"
+  },
   "[jsp]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
