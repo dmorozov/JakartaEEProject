@@ -8,11 +8,11 @@ import org.apache.struts2.ModelDriven;
 import org.apache.struts2.Preparable;
 import org.apache.struts2.interceptor.parameter.StrutsParameter;
 import jakarta.ejb.EJB;
-// import jakarta.inject.Named;
+import jakarta.inject.Named;
 
 import java.util.List;
 
-// @Named
+@Named
 public class AccountAction extends ActionSupport implements ModelDriven<Account>, Preparable {
 
   private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
   @EJB
   private AccountService accountService;
 
-  private Account account = new Account();
+  private Account account; // = new Account();
   private List<Account> accounts;
   private Long id;
 
@@ -29,9 +29,6 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
    */
   @Override
   public void prepare() {
-    System.out.println("=== prepare() called ===");
-    System.out.println("id value: " + id);
-    System.out.println("account object: " + account);
     // Do NOT initialize account here - let method-specific prepare handle it
   }
 
@@ -39,9 +36,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
    * Method-specific prepare for view action - called AFTER first params interceptor.
    */
   public final void prepareView() {
-    System.out.println("=== prepareView() called ===");
-    System.out.println("id value in prepareView: " + id);
-    if (id != null && id > 0) {
+    if (id != null && id > 0 && account == null) {
       account = accountService.findAccountById(id);
     }
   }
@@ -50,9 +45,7 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
    * Method-specific prepare for edit action - called AFTER first params interceptor.
    */
   public final void prepareEdit() {
-    System.out.println("=== prepareEdit() called ===");
-    System.out.println("id value in prepareEdit: " + id);
-    if (id != null && id > 0) {
+    if (id != null && id > 0 && account == null) {
       account = accountService.findAccountById(id);
     }
   }
@@ -61,12 +54,8 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
    * Method-specific prepare for save action - called AFTER first params interceptor.
    */
   public final void prepareSave() {
-    System.out.println("=== prepareSave() called ===");
-    System.out.println("id value in prepareSave: " + id);
-    if (id != null && id > 0) {
+    if (id != null && id > 0 && account == null) {
       account = accountService.findAccountById(id);
-    } else {
-      account = new Account();
     }
   }
 
@@ -87,7 +76,6 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     }
 
     try {
-      account = accountService.findAccountById(id);
       if (account == null) {
         addActionError("Account not found with ID: " + id);
         return INPUT;
@@ -111,7 +99,6 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     }
 
     try {
-      account = accountService.findAccountById(id);
       if (account == null) {
         addActionError("Account not found with ID: " + id);
         return INPUT;
@@ -160,30 +147,12 @@ public class AccountAction extends ActionSupport implements ModelDriven<Account>
     return account;
   }
 
-  // Getters and Setters
   public final Account getAccount() {
     return account;
   }
 
-  /**
-   * Sets the account.
-   *
-   * @param account
-   */
-  public void setAccount(final Account account) {
-    this.account = account;
-  }
-
   public final List<Account> getAccounts() {
     return accounts;
-  }
-
-  public final void setAccounts(final List<Account> accounts) {
-    this.accounts = accounts;
-  }
-
-  public final Long getId() {
-    return id;
   }
 
   @StrutsParameter

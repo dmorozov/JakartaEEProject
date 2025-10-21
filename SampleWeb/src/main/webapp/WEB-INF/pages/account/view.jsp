@@ -27,12 +27,12 @@
 <div class="actions">
     <s:a action="list" namespace="/account" cssClass="btn btn-secondary">Back to List</s:a>
     <s:a action="edit" namespace="/account" cssClass="btn btn-primary">
-        <s:param name="id" value="account.id"/>
+        <s:param name="id" value="id"/>
         Edit
     </s:a>
     <s:a action="delete" namespace="/account" cssClass="btn btn-danger"
          onclick="return confirm('Are you sure you want to delete this account?');">
-        <s:param name="id" value="account.id"/>
+        <s:param name="id" value="id"/>
         Delete
     </s:a>
 </div>
@@ -40,7 +40,7 @@
 <div style="margin-top: 30px;">
     <h3>Contacts for this Account</h3>
     <s:a action="list" namespace="/contact" cssClass="btn btn-success">
-        <s:param name="accountId" value="account.id"/>
+        <s:param name="accountId" value="id"/>
         View Contacts
     </s:a>
 </div>

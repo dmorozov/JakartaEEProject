@@ -8,11 +8,15 @@
   <constant name="struts.ui.theme" value="simple" />
   <constant name="struts.convention.default.parent.package" value="default" />
   <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
-  <constant name="struts.allowlist.packageNames" value="com.example.jakartaee.entity" />
   <constant name="struts.action.excludePattern" value="/ui/.*" />
 
   <!-- Allow parameter injection for model properties -->
   <constant name="struts.parameters.requireAnnotations" value="false" />
+
+  <!-- Allow access to entity package for OGNL expressions -->
+  <constant name="struts.excludedPackageNamePatterns" value="" />
+  <constant name="struts.excludedClasses" value="" />
+  <constant name="struts.allowlist.enable" value="false" />
 
   <!-- CDI Integration -->
   <constant name="struts.objectFactory" value="cdi" />
