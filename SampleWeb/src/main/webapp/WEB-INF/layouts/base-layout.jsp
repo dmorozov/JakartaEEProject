@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><tiles:getAsString name="title"/></title>
     <style>
+        @import url('<s:url value="/ui/css/core.css"/>');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -43,11 +45,11 @@
     <script type="module" src="${mainJsUrl}" nonce="${nonce}"></script>
 </head>
 <body>
-    <header>
+    <heade id="main-header">
         <div class="container">
             <tiles:insertAttribute name="header"/>
         </div>
-    </header>
+    </heade>
 
     <nav>
         <div class="container">
