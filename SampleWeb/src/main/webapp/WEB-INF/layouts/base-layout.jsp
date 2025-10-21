@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.example.com;">
     <title><tiles:getAsString name="title"/></title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,8 +39,8 @@
         .actions { margin-top: 20px; }
     </style>
 
-    <s:url var="mainContextUrl" value="/ui" />
-    <script type="module" src="${mainContextUrl}/main.js"></script>
+    <s:url var="mainJsUrl" value="/ui/main.js" />
+    <script type="module" src="${mainJsUrl}" nonce="${nonce}"></script>
 </head>
 <body>
     <header>
