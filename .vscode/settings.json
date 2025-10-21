@@ -39,7 +39,7 @@
   "java.compile.nullAnalysis.mode": "automatic",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "terminal.integrated.defaultProfile.linux": "zsh",
-  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "terminal.integrated.fontFamily": "monospace",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "database-client.autoSync": true,
   "javaPMD.rulesets": [

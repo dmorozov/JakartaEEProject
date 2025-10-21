@@ -1,6 +1,12 @@
 {
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,html,jsp}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,html,jsp}\""
+  },
   "devDependencies": {
     "prettier": "2.8.8",
-    "prettier-plugin-jsp": "^1.0.13"
+    "prettier-plugin-jsp": "^1.0.13",
+    "typescript": "^5.9.3"
   }
 }

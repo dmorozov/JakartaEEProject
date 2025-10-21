@@ -28,12 +28,6 @@ cd SampleWeb && ../mvnw clean package
 cd /workspaces && ./mvnw clean install
 ```
 
-### Build Script
-```bash
-# Convenience script that sets JAVA_HOME and builds
-./build.sh
-```
-
 ### Verify Build Artifacts
 ```bash
 # Check EAR file (main deployable)
@@ -50,15 +44,39 @@ This project currently has no automated test suite. Manual testing requires:
 2. Application server deployment (TomEE or GlassFish)
 3. Accessing the web interface at `http://localhost:8080/sample/`
 
-## Code Formatting
+## Code Quality
 
+### Code Formatting
 The project uses Prettier for JSP files:
 ```bash
 # Format JSP files
 npx prettier --write "**/*.jsp"
+
+# Check formatting without making changes
+npx prettier --check "**/*.jsp"
 ```
 
 Prettier configuration is in `.prettierrc.mjs` with `prettier-plugin-jsp` for JSP support.
+
+### Static Analysis
+The project uses Checkstyle and PMD for code quality:
+
+```bash
+# Run Checkstyle validation
+./mvnw checkstyle:check
+
+# Run PMD analysis
+./mvnw pmd:check
+
+# Run both during the validate phase
+./mvnw validate
+```
+
+Configuration files:
+- Checkstyle: `.vscode/checkstyle.xml` with suppressions in `.vscode/checkstyle-suppressions.xml`
+- PMD: `.vscode/pmd-ruleset.xml`
+
+Note: Both tools run automatically during `mvn clean install` and will fail the build on violations.
 
 ## High-Level Architecture
 
@@ -227,7 +245,7 @@ http://localhost:8080/sample/
 
 3. **JDBC Repositories Unused**: `SampleCore` includes JDBC repository implementations (JdbcTemplate-style) but EJBs use JPA EntityManager by default. JDBC repos can be used as alternative.
 
-4. **Java Version**: Project configured for Java 21 (see parent pom.xml `maven.compiler.release=21`) but build script references Java 17 GraalVM.
+4. **Java Version**: Project configured for Java 21 (see parent pom.xml `maven.compiler.release=21`).
 
 5. **CDI Integration**: While `struts2-cdi-plugin` is configured, EJB injection via `@EJB` is the primary integration pattern between web and business layers.
 
