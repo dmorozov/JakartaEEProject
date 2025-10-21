@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.example.com;">
     <title><tiles:getAsString name="title"/></title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,6 +39,7 @@
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
         .actions { margin-top: 20px; }
     </style>
+    <s:script src="/ui/main.js" />
 </head>
 <body>
     <header>

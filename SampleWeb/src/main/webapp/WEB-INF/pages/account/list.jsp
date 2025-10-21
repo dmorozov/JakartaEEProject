@@ -26,7 +26,7 @@
         <s:else>
             <s:iterator value="accounts" var="account">
                 <tr>
-                    <td><s:property value="#account.id"/></td>
+                    <td><s:property value="#account.id" /></td>
                     <td><s:property value="#account.name"/></td>
                     <td><s:property value="#account.email"/></td>
                     <td><s:date name="#account.createdDate" format="yyyy-MM-dd HH:mm:ss"/></td>

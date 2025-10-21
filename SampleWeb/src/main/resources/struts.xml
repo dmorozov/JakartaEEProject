@@ -1,136 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN"
-    "https://struts.apache.org/dtds/struts-6.0.dtd">
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 6.0//EN" "https://struts.apache.org/dtds/struts-6.0.dtd">
 
 <struts>
-    <!-- Configuration -->
-    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
-    <constant name="struts.devMode" value="true"/>
-    <constant name="struts.ui.theme" value="simple"/>
-    <constant name="struts.convention.default.parent.package" value="default"/>
-    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+  <!-- Configuration -->
+  <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.ui.theme" value="simple" />
+  <constant name="struts.convention.default.parent.package" value="default" />
+  <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+  <constant name="struts.allowlist.packageNames" value="com.example.jakartaee.entity" />
+  <!-- <constant name="struts.ui.staticContentPath" value="/ui" />
+  <constant name="struts.action.excludePattern" value="/ui/*" /> -->
 
-    <!-- CDI Integration -->
-    <constant name="struts.objectFactory" value="cdi" />
+  <!-- CDI Integration -->
+  <constant name="struts.objectFactory" value="cdi" />
 
-    <!-- Tiles Plugin Configuration -->
-    <constant name="struts.tiles.defaultLocale" value="en_US"/>
+  <!-- Tiles Plugin Configuration -->
+  <constant name="struts.tiles.defaultLocale" value="en_US" />
 
-    <!-- Default Package -->
-    <package name="default" extends="struts-default, tiles-default">
-        <result-types>
-            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
-        </result-types>
+  <!-- Default Package -->
+  <package name="default" extends="struts-default, tiles-default">
+    <result-types>
+      <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+    </result-types>
 
-        <global-results>
-            <result name="error">/WEB-INF/pages/error.jsp</result>
-        </global-results>
+    <global-results>
+      <result name="error">/WEB-INF/pages/error.jsp</result>
+    </global-results>
 
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
-        </global-exception-mappings>
-    </package>
+    <global-exception-mappings>
+      <exception-mapping exception="java.lang.Exception" result="error" />
+    </global-exception-mappings>
+  </package>
 
-    <!-- Home Package -->
-    <package name="home" namespace="/" extends="default">
-        <action name="index" class="com.example.jakartaee.action.HomeAction">
-            <result name="success" type="tiles">home</result>
-        </action>
+  <!-- Home Package -->
+  <package name="home" namespace="/" extends="default">
+    <action name="index" class="com.example.jakartaee.action.HomeAction">
+      <result name="success" type="tiles">home</result>
+    </action>
 
-        <action name="remoteTest" class="com.example.jakartaee.action.RemoteEjbAction" method="test">
-            <result name="success">/WEB-INF/pages/remote-result.jsp</result>
-        </action>
-    </package>
+    <action name="remoteTest" class="com.example.jakartaee.action.RemoteEjbAction" method="test">
+      <result name="success">/WEB-INF/pages/remote-result.jsp</result>
+    </action>
+  </package>
 
-    <!-- Account Package -->
-    <package name="account" namespace="/account" extends="default">
-        <action name="list" class="com.example.jakartaee.action.AccountAction" method="list">
-            <result name="success" type="tiles">account.list</result>
-        </action>
+  <!-- Account Package -->
+  <package name="account" namespace="/account" extends="default">
+    <action name="list" class="com.example.jakartaee.action.AccountAction" method="list">
+      <result name="success" type="tiles">account.list</result>
+    </action>
 
-        <action name="view" class="com.example.jakartaee.action.AccountAction" method="view">
-            <result name="success" type="tiles">account.view</result>
-            <result name="input" type="redirectAction">list</result>
-        </action>
+    <action name="view" class="com.example.jakartaee.action.AccountAction" method="view">
+      <result name="success" type="tiles">account.view</result>
+      <result name="input" type="redirectAction">list</result>
+    </action>
 
-        <action name="create" class="com.example.jakartaee.action.AccountAction" method="create">
-            <result name="success" type="tiles">account.form</result>
-        </action>
+    <action name="create" class="com.example.jakartaee.action.AccountAction" method="create">
+      <result name="success" type="tiles">account.form</result>
+    </action>
 
-        <action name="edit" class="com.example.jakartaee.action.AccountAction" method="edit">
-            <result name="success" type="tiles">account.form</result>
-            <result name="input" type="redirectAction">list</result>
-        </action>
+    <action name="edit" class="com.example.jakartaee.action.AccountAction" method="edit">
+      <result name="success" type="tiles">account.form</result>
+      <result name="input" type="redirectAction">list</result>
+    </action>
 
-        <action name="save" class="com.example.jakartaee.action.AccountAction" method="save">
-            <result name="success" type="redirectAction">list</result>
-            <result name="input" type="tiles">account.form</result>
-        </action>
+    <action name="save" class="com.example.jakartaee.action.AccountAction" method="save">
+      <result name="success" type="redirectAction">list</result>
+      <result name="input" type="tiles">account.form</result>
+    </action>
 
-        <action name="delete" class="com.example.jakartaee.action.AccountAction" method="delete">
-            <result name="success" type="redirectAction">list</result>
-        </action>
-    </package>
+    <action name="delete" class="com.example.jakartaee.action.AccountAction" method="delete">
+      <result name="success" type="redirectAction">list</result>
+    </action>
+  </package>
 
-    <!-- Contact Package -->
-    <package name="contact" namespace="/contact" extends="default">
-        <action name="list" class="com.example.jakartaee.action.ContactAction" method="list">
-            <result name="success" type="tiles">contact.list</result>
-        </action>
+  <!-- Contact Package -->
+  <package name="contact" namespace="/contact" extends="default">
+    <action name="list" class="com.example.jakartaee.action.ContactAction" method="list">
+      <result name="success" type="tiles">contact.list</result>
+    </action>
 
-        <action name="view" class="com.example.jakartaee.action.ContactAction" method="view">
-            <result name="success" type="tiles">contact.view</result>
-            <result name="input" type="redirectAction">list</result>
-        </action>
+    <action name="view" class="com.example.jakartaee.action.ContactAction" method="view">
+      <result name="success" type="tiles">contact.view</result>
+      <result name="input" type="redirectAction">list</result>
+    </action>
 
-        <action name="create" class="com.example.jakartaee.action.ContactAction" method="create">
-            <result name="success" type="tiles">contact.form</result>
-        </action>
+    <action name="create" class="com.example.jakartaee.action.ContactAction" method="create">
+      <result name="success" type="tiles">contact.form</result>
+    </action>
 
-        <action name="edit" class="com.example.jakartaee.action.ContactAction" method="edit">
-            <result name="success" type="tiles">contact.form</result>
-            <result name="input" type="redirectAction">list</result>
-        </action>
+    <action name="edit" class="com.example.jakartaee.action.ContactAction" method="edit">
+      <result name="success" type="tiles">contact.form</result>
+      <result name="input" type="redirectAction">list</result>
+    </action>
 
-        <action name="save" class="com.example.jakartaee.action.ContactAction" method="save">
-            <result name="success" type="redirectAction">list</result>
-            <result name="input" type="tiles">contact.form</result>
-        </action>
+    <action name="save" class="com.example.jakartaee.action.ContactAction" method="save">
+      <result name="success" type="redirectAction">list</result>
+      <result name="input" type="tiles">contact.form</result>
+    </action>
 
-        <action name="delete" class="com.example.jakartaee.action.ContactAction" method="delete">
-            <result name="success" type="redirectAction">list</result>
-        </action>
-    </package>
+    <action name="delete" class="com.example.jakartaee.action.ContactAction" method="delete">
+      <result name="success" type="redirectAction">list</result>
+    </action>
+  </package>
 
-    <!-- Address Package -->
-    <package name="address" namespace="/address" extends="default">
-        <action name="list" class="com.example.jakartaee.action.AddressAction" method="list">
-            <result name="success" type="tiles">address.list</result>
-        </action>
+  <!-- Address Package -->
+  <package name="address" namespace="/address" extends="default">
+    <action name="list" class="com.example.jakartaee.action.AddressAction" method="list">
+      <result name="success" type="tiles">address.list</result>
+    </action>
 
-        <action name="view" class="com.example.jakartaee.action.AddressAction" method="view">
-            <result name="success" type="tiles">address.view</result>
-            <result name="input" type="redirectAction">list</result>
-        </action>
+    <action name="view" class="com.example.jakartaee.action.AddressAction" method="view">
+      <result name="success" type="tiles">address.view</result>
+      <result name="input" type="redirectAction">list</result>
+    </action>
 
-        <action name="create" class="com.example.jakartaee.action.AddressAction" method="create">
-            <result name="success" type="tiles">address.form</result>
-        </action>
+    <action name="create" class="com.example.jakartaee.action.AddressAction" method="create">
+      <result name="success" type="tiles">address.form</result>
+    </action>
 
-        <action name="edit" class="com.example.jakartaee.action.AddressAction" method="edit">
-            <result name="success" type="tiles">address.form</result>
-            <result name="input" type="redirectAction">list</result>
-        </action>
+    <action name="edit" class="com.example.jakartaee.action.AddressAction" method="edit">
+      <result name="success" type="tiles">address.form</result>
+      <result name="input" type="redirectAction">list</result>
+    </action>
 
-        <action name="save" class="com.example.jakartaee.action.AddressAction" method="save">
-            <result name="success" type="redirectAction">list</result>
-            <result name="input" type="tiles">address.form</result>
-        </action>
+    <action name="save" class="com.example.jakartaee.action.AddressAction" method="save">
+      <result name="success" type="redirectAction">list</result>
+      <result name="input" type="tiles">address.form</result>
+    </action>
 
-        <action name="delete" class="com.example.jakartaee.action.AddressAction" method="delete">
-            <result name="success" type="redirectAction">list</result>
-        </action>
-    </package>
+    <action name="delete" class="com.example.jakartaee.action.AddressAction" method="delete">
+      <result name="success" type="redirectAction">list</result>
+    </action>
+  </package>
 
 </struts>

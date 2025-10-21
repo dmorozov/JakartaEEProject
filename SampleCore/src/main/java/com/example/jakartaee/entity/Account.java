@@ -44,6 +44,9 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Contact> contacts = new ArrayList<>();
 
+    /**
+     * Lifecycle callback to set the createdDate before persisting the entity.
+     */
     @PrePersist
     protected void onCreate() {
       createdDate = LocalDateTime.now();
@@ -68,11 +71,21 @@ public class Account implements Serializable {
       this.id = id;
     }
 
-    public final String getName() {
+    /**
+     * Get the name of the account holder.
+     *
+     * @return name of the account holder.
+     */
+    public String getName() {
       return name;
     }
 
-    public final void setName(final String name) {
+    /**
+     * Set the name of the account holder.
+     *
+     * @param name name of the account holder.
+     */
+    public void setName(final String name) {
       this.name = name;
     }
 
