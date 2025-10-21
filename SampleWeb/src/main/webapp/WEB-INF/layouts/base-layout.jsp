@@ -39,7 +39,9 @@
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
         .actions { margin-top: 20px; }
     </style>
-    <s:script src="/ui/main.js" />
+
+    <s:url var="mainContextUrl" value="/ui" />
+    <script type="module" src="${mainContextUrl}/main.js"></script>
 </head>
 <body>
     <header>

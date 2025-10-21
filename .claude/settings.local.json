@@ -10,7 +10,9 @@
       "Read(//usr/lib/jvm/**)",
       "Bash(unzip:*)",
       "Bash(../mvnw dependency:tree:*)",
-      "Bash(jar:*)"
+      "Bash(jar:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

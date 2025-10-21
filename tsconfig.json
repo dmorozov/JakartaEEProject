@@ -16,6 +16,11 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    // Vite-specific settings
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "noEmit": true, // Vite handles the emit, TypeScript only does type checking
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
@@ -40,7 +45,7 @@
       "@test-utils": [
         "./SampleWeb/src/main/webui/test-utils"
       ]
-    },
+    }
   },
   "include": [
     "./SampleWeb/src/main/webui/**/*.ts"

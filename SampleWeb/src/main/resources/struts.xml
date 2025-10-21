@@ -9,8 +9,8 @@
   <constant name="struts.convention.default.parent.package" value="default" />
   <constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
   <constant name="struts.allowlist.packageNames" value="com.example.jakartaee.entity" />
-  <!-- <constant name="struts.ui.staticContentPath" value="/ui" />
-  <constant name="struts.action.excludePattern" value="/ui/*" /> -->
+  <constant name="struts.action.excludePattern" value="/ui/.*" />
+  <constant name="struts.contentSecurityPolicy" value="script-src 'self' 'unsafe-inline'" />
 
   <!-- CDI Integration -->
   <constant name="struts.objectFactory" value="cdi" />
