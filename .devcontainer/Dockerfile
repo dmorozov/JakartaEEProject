@@ -50,3 +50,6 @@ RUN wget https://dlcdn.apache.org/tomee/tomee-10.1.2/apache-tomee-10.1.2-plus.ta
     && mv apache-tomee-plus-10.1.2/* $CATALINA_HOME/ \
     && rm -rf apache-tomee-plus-10.1.2 \
     && rm tomcat.tar.gz
+
+COPY tomee/tomee.xml ${CATALINA_HOME}/conf/tomee.xml
+COPY tomee/tomcat-users.xml ${CATALINA_HOME}/conf/tomcat-users.xml
