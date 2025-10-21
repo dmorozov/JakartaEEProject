@@ -217,27 +217,13 @@ cp /path/to/JakartaEEBootstrap/SampleEar/target/JakartaEESample.ear apps/
 
 #### 5. Configure Security Realm (Optional)
 
-Edit `conf/tomee.xml` to add users:
+Edit `conf/tomcat-users.xml` to add users:
 
 ```xml
-<tomee>
-  <Resource id="MySecurityRealm" type="PropertiesLoginModule">
-    UsersFile conf/users.properties
-    GroupsFile conf/groups.properties
-  </Resource>
-</tomee>
-```
-
-Create `conf/users.properties`:
-```
-admin=adminpass
-user=userpass
-```
-
-Create `conf/groups.properties`:
-```
-admin=admin,user
-user=user
+  <role rolename="admin" />
+  <role rolename="user" />
+  <user username="admin" password="adminpass" roles="admin,user" />
+  <user username="user" password="userpass" roles="user" />
 ```
 
 #### 6. Start TomEE
