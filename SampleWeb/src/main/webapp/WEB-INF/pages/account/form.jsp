@@ -1,19 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<h2><s:if test="account.id == null">Create New Account</s:if><s:else>Edit Account</s:else></h2>
+<h2><s:if test="id == null">Create New Account</s:if><s:else>Edit Account</s:else></h2>
 
 <s:form action="save" namespace="/account" method="post">
-    <s:hidden name="account.id"/>
+    <s:hidden name="id"/>
 
     <div class="form-group">
-        <s:label for="account.name" value="Name:"/>
-        <s:textfield name="account.name" id="account.name" required="true" placeholder="Enter account name"/>
+        <s:label for="name" value="Name:"/>
+        <s:textfield name="name" id="name" required="true" placeholder="Enter account name"/>
     </div>
 
     <div class="form-group">
-        <s:label for="account.email" value="Email:"/>
-        <s:textfield name="account.email" id="account.email" type="email" required="true" placeholder="Enter email address"/>
+        <s:label for="email" value="Email:"/>
+        <s:textfield name="email" id="email" type="email" required="true" placeholder="Enter email address"/>
     </div>
 
     <div class="actions">
