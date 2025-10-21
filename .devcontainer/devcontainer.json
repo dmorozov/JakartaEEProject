@@ -51,9 +51,14 @@
       ]
     }
   },
-  "postStartCommand": "bash .devcontainer/postCreateCommand.sh", // && ./mvnw compile quarkus:dev -pl app
+  "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
+  "postStartCommand": "bash .devcontainer/postStartCommand.sh",
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // This can be used to network with other containers or with the host.
+  "forwardPorts": [
+    5434,
+    8080
+  ],
+  // Define user friendly names for exposed ports
   "portsAttributes": {
     "5434": {
       "label": "Postgres SQL Server"
@@ -62,11 +67,6 @@
       "label": "JakartaEE Webapp"
     }
   },
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [
-    5434,
-    8080
-  ],
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" // Binding the host docker socket to the containerit
   ],

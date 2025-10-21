@@ -53,3 +53,6 @@ RUN wget https://dlcdn.apache.org/tomee/tomee-10.1.2/apache-tomee-10.1.2-plus.ta
 
 COPY tomee/tomee.xml ${CATALINA_HOME}/conf/tomee.xml
 COPY tomee/tomcat-users.xml ${CATALINA_HOME}/conf/tomcat-users.xml
+
+RUN mkdir -p /home/${USERNAME}/.rsp/redhat-community-server-connector/servers
+COPY tomee/TomEE_10 /home/${USERNAME}/.rsp/redhat-community-server-connector/servers/TomEE_10
